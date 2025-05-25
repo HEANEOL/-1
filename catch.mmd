@@ -52,7 +52,7 @@ sequenceDiagram
         CatchTable-->>User: 예약 취소 확인
         deactivate CatchTable
 
-        User->>+CatchTable: 레스토랑 운영 상태 변경 (레스토랑 이름)
+        User->>+CatchTable: 레스토랑 운영 상태 변경 (레스토랑 이름, 구현은 했으나 미사용중. 음식점 사장님이 쓸것으로 생각 된 기능)
         activate CatchTable
         CatchTable->>+Restaurant: 운영 상태 변경 요청
         activate Restaurant
