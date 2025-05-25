@@ -1,0 +1,55 @@
+sequenceDiagram
+    participant User
+    participant CatchTable
+    participant Restaurant
+
+    User->>+CatchTable: 로그인 요청 (아이디/비밀번호)
+    activate CatchTable
+    CatchTable-->>User: 로그인 성공/실패 응답
+    deactivate CatchTable
+
+    alt 로그인 실패
+        User->>+CatchTable: 로그인 재시도
+        activate CatchTable
+        CatchTable-->>User: 로그인 성공/실패 응답
+        deactivate CatchTable
+    end
+    alt 로그인 성공
+    User->>+CatchTable: 레스토랑 검색 요청
+    activate CatchTable
+    CatchTable->>+Restaurant: 검색 결과 참조 요청
+    activate Restaurant
+    Restaurant-->>CatchTable: 검색 결과 확인
+    deactivate Restaurant
+    CatchTable-->>User: 검색 결과 반환
+    deactivate CatchTable
+
+
+    User->>+CatchTable: 예약 요청
+    activate CatchTable
+    CatchTable->>+Restaurant: 예약 가능 여부 확인
+    activate Restaurant
+    Restaurant-->>CatchTable: 예약 가능 응답
+    deactivate Restaurant
+    CatchTable-->>User: 예약 완료 확인
+    deactivate CatchTable
+
+    User->>+CatchTable: 예약 알림 설정 (푸시 알림 ON)
+    activate CatchTable
+    CatchTable-->>User: 알림 설정 완료
+    deactivate CatchTable
+
+    User->>+CatchTable: 예약 취소 요청
+    activate CatchTable
+    CatchTable->>+Restaurant: 예약 취소 처리
+    activate Restaurant
+    Restaurant-->>CatchTable: 취소 완료
+    deactivate Restaurant
+    CatchTable-->>User: 예약 취소 확인
+    deactivate CatchTable
+
+    User->>+CatchTable: 로그아웃 요청
+    activate CatchTable
+    CatchTable-->>User: 로그아웃 확인
+     end
+    deactivate CatchTable
