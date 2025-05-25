@@ -38,6 +38,14 @@ sequenceDiagram
     activate CatchTable
     CatchTable-->>User: 알림 설정 완료
     deactivate CatchTable
+    User->>+CatchTable: 예약 확인요청
+    activate CatchTable
+    CatchTable->>+Restaurant: 예약 여부 확인
+    activate Restaurant
+    Restaurant-->>CatchTable: 예약 응답
+    deactivate Restaurant
+    CatchTable-->>User: 예약 확인
+    deactivate CatchTable
 
     User->>+CatchTable: 예약 취소 요청
     activate CatchTable
